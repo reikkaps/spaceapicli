@@ -1,7 +1,7 @@
 from setuptools import setup, find_packages
 setup(
     name="SpaceApiCli",
-    version="0.1rc1",
+    version="0.1rc2",
     packages=find_packages(),
     scripts=["src/SpaceApiCli.py"],
 
