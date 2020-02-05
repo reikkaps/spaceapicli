@@ -3,7 +3,7 @@ setup(
     name="SpaceApiCli",
     version="0.1rc1",
     packages=find_packages(),
-    scripts=["SpaceApiCli.py"],
+    scripts=["src/SpaceApiCli.py"],
 
     # Project uses reStructuredText, so ensure that the docutils get
     # installed or upgraded on the target machine
