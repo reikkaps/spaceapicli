@@ -27,6 +27,8 @@ the unix console or toolbars like polybar
 		-w                    get homepage url
 		
 
-Defaults: without option -n it will get the state of the hackspace LeineLab in Hannover, Germany
+Defaults: without option -n it will get the state of the hackspace 
+LeineLab in Hannover, Germany <https://leinelab.org>. 
+
 
 
