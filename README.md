@@ -16,16 +16,17 @@ the unix console or toolbars like polybar
 
 ## Usage
 
-	usage: SpaceApiCli.py [-h] [-n NAME] [-v] [-w]
+	usage: SpaceApiCli.py [-h] [-n NAME] [-l] [-v] [-w]
 
 	Show Space Status
 
 	optional arguments:
 		-h, --help            show this help message and exit
 		-n NAME, --name NAME  Name of Hackerspace
-		-v                    Show more Infos of Hackerspace
-		-w                    get homepage url
-		
+		-l, --list            List all Hackspaces on Spaceapi
+		-v, --verbose         Show more Infos of Hackspace
+		-w, --web             get homepage url
+	
 
 Defaults: without option -n it will get the state of the hackspace 
 LeineLab in Hannover, Germany <https://leinelab.org>. 
