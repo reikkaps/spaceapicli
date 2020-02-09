@@ -49,10 +49,10 @@ def status(json, verbose):
         pass
     
     if json['state']['open'] is False:
-        print('🧘 closed'.format(str(json['space'])))
+        print(' {} is closed'.format(str(json['space'])))
         return False
 
-    print('🌞 open'.format(str(json['space'])))
+    print(' {} is open'.format(str(json['space'])))
     return True
 
 
