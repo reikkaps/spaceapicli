@@ -1,5 +1,7 @@
 # SpaceApiCli
 
+![Python application](https://github.com/reikkaps/spaceapicli/workflows/Python%20application/badge.svg?branch=master)
+
 a simple cmdline tool to access the hackspace-API from 
 the unix console or toolbars like polybar
 
