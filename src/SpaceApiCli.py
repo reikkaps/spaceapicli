@@ -122,7 +122,7 @@ def main(args):
 if __name__ == "__main__":
     parser = argparse.ArgumentParser(description='Show Space Status')
     parser.add_argument('-n', '--name', help='Name of Hackerspace', default='LeineLab')
-    parser.add_argument('-d', '--details', help='Shows more details of Hackerspace', default='LeineLab')
+    parser.add_argument('-d', '--details', help='Shows more details of Hackerspace')
     parser.add_argument('-l', '--list', action='store_true', help='List all Hackspaces on Spaceapi')
     parser.add_argument('-v', '--verbose', action='store_true', help='verbose output')
     parser.add_argument('-w', '--web', action='store_true', help='get homepage url')
