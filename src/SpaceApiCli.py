@@ -41,6 +41,11 @@ def list_spaces():
     # print all entries 
     for name in directory:    
         print('{}'.format(name))
+
+
+def details(data, verbose):
+    """Show all details"""
+    print(json.dumps(data, indent=4, sort_keys=True))
     
 
 def status(json, verbose):
@@ -84,8 +89,9 @@ def getspaceurl(name, debug=False):
         sys.exit(1)
 
 def main(args):
+    
     if args.verbose:
-        debug = args.v
+        debug = True
     else:
         debug = False
 
@@ -100,6 +106,11 @@ def main(args):
     except ConnectionError as e:
         print('not connected')
         sys.exit(1)
+
+
+    if args.details:
+        details(json, debug)
+        sys.exit(0)
         
     if args.web:
         getHomepage(json, debug)
@@ -112,8 +123,9 @@ def main(args):
 if __name__ == "__main__":
     parser = argparse.ArgumentParser(description='Show Space Status')
     parser.add_argument('-n', '--name', help='Name of Hackerspace', default='LeineLab')
+    parser.add_argument('-d', '--details', help='Shows more details of Hackerspace', default='LeineLab')
     parser.add_argument('-l', '--list', action='store_true', help='List all Hackspaces on Spaceapi')
-    parser.add_argument('-v', '--verbose', action='store_true', help='Show more Infos of Hackspace')
+    parser.add_argument('-v', '--verbose', action='store_true', help='verbose output')
     parser.add_argument('-w', '--web', action='store_true', help='get homepage url')
     args = parser.parse_args()
     
