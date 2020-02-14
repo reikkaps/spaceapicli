@@ -2,71 +2,71 @@
 #
 # Reiko Kaps 2015-2020 <r31k@k4p5.de>
 
+import argparse
 import json
-import sys, os, argparse
-import shutil
 import subprocess
+import sys
 
-try: 
+try:
     import requests
     from requests.exceptions import ConnectionError
-except ImportError as e:
+except ImportError:
     print('please install requests python module')
     sys.exit(1)
 
-DIR_URL='https://directory.spaceapi.io/'
+DIR_URL = 'https://directory.spaceapi.io/'
+
 
 def download(url):
     """
     Download json endpoint
-    Parameter url: URL 
+    Parameter url: URL
     returns string (json)
     """
     try:
         file = requests.get(url)
     except ConnectionError as e:
         raise e
-        
+
     return file.json()
 
 
 def list_spaces():
     """
-    list all directory entries 
+    list all directory entries
     """
     try:
         directory = download(DIR_URL)
     except ConnectionError:
         raise
-    # print all entries 
-    for name in directory:    
+    # print all entries
+    for name in directory:
         print('{}'.format(name))
 
 
 def details(data, verbose):
     """Show all details"""
     print(json.dumps(data, indent=4, sort_keys=True))
-    
 
-def status(json, verbose):
-    """Ermittelt aus dem Json den Status des Hackerspace"""
+
+def status(json_data, verbose):
+    """Ermittelt aus dem JSON den Status des Hackerspace"""
     if verbose is True:
         pass
-    
-    if json['state']['open'] is False:
-        print(' {} is closed'.format(str(json['space'])))
+
+    if json_data['state']['open'] is False:
+        print(' {} is closed'.format(str(json_data['space'])))
         return False
 
-    print(' {} is open'.format(str(json['space'])))
+    print(' {} is open'.format(str(json_data['space'])))
     return True
 
 
-def getHomepage(json, verbose):
+def getHomepage(json_data, verbose):
     """Ermittelt aus dem Json die Homepage des Hackerspace"""
-    if json['url']:
-        print('opening {}'.format(json['url']))
-        subprocess.run(['firefox', json['url']])
-        
+    if json_data['url']:
+        print('opening {}'.format(json_data['url']))
+        subprocess.run(['firefox', json_data['url']])
     else:
         return False
 
@@ -76,7 +76,7 @@ def getspaceurl(name, debug=False):
         directory = download(DIR_URL)
     except ConnectionError:
         raise
-    if name in directory:    
+    if name in directory:
         return directory[name]
     else:
         if debug:
@@ -88,8 +88,9 @@ def getspaceurl(name, debug=False):
                 return directory[key]
         sys.exit(1)
 
+
 def main(args):
-    
+
     if args.verbose:
         debug = True
     else:
@@ -100,23 +101,21 @@ def main(args):
         list_spaces()
         sys.exit(0)
 
-        
     try:
-        json = download(getspaceurl(args.name, debug))
-    except ConnectionError as e:
+        data = download(getspaceurl(args.name, debug))
+    except ConnectionError:
         print('not connected')
         sys.exit(1)
 
-
     if args.details:
-        details(json, debug)
+        details(data, debug)
         sys.exit(0)
-        
+
     if args.web:
-        getHomepage(json, debug)
+        getHomepage(data, debug)
         sys.exit(0)
-        
-    if status(json, verbose=False):
+
+    if status(data, verbose=False):
         sys.exit(0)
 
 
@@ -128,8 +127,5 @@ if __name__ == "__main__":
     parser.add_argument('-v', '--verbose', action='store_true', help='verbose output')
     parser.add_argument('-w', '--web', action='store_true', help='get homepage url')
     args = parser.parse_args()
-    
+
     main(args)
-    
-    
-    
