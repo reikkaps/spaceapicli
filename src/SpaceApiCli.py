@@ -55,7 +55,8 @@ def status(json_data, verbose):
         pass
 
     if json_data['state']['open'] is False:
-        print('{} is closed'.format(str(json_data['space'])))
+        if verbose:
+            print('{} is closed'.format(str(json_data['space'])))
         return False
 
     print('{} is open'.format(str(json_data['space'])))
@@ -115,17 +116,22 @@ def main(args):
         getHomepage(data, debug)
         sys.exit(0)
 
-    if status(data, verbose=False):
+    if status(data, debug):
         sys.exit(0)
 
 
 if __name__ == "__main__":
     parser = argparse.ArgumentParser(description='Show Space Status')
-    parser.add_argument('-n', '--name', help='Name of Hackerspace', default='LeineLab')
-    parser.add_argument('-d', '--details', help='Shows more details of Hackerspace')
-    parser.add_argument('-l', '--list', action='store_true', help='List all Hackspaces on Spaceapi')
-    parser.add_argument('-v', '--verbose', action='store_true', help='verbose output')
-    parser.add_argument('-w', '--web', action='store_true', help='get homepage url')
+    parser.add_argument('-n', '--name', help='Name of Hackerspace',
+                        default='LeineLab')
+    parser.add_argument('-d', '--details',
+                        help='Shows more details of Hackerspace')
+    parser.add_argument('-l', '--list', action='store_true',
+                        help='List all Hackspaces on Spaceapi')
+    parser.add_argument('-v', '--verbose', action='store_true',
+                        help='verbose output')
+    parser.add_argument('-w', '--web', action='store_true',
+                        help='get homepage url')
     args = parser.parse_args()
 
     main(args)
