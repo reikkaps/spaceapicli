@@ -55,10 +55,10 @@ def status(json_data, verbose):
         pass
 
     if json_data['state']['open'] is False:
-        print(' {} is closed'.format(str(json_data['space'])))
+        print('{} is closed'.format(str(json_data['space'])))
         return False
 
-    print(' {} is open'.format(str(json_data['space'])))
+    print('{} is open'.format(str(json_data['space'])))
     return True
 
 
